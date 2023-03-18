@@ -1,0 +1,58 @@
+name: Build and publish Latex
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+    container: asciidoctor/docker-asciidoctor
+    defaults:
+      run:
+        working-directory: thesis/
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@main
+      - name: Build
+        uses: reitermarkus/latexmk@main
+      - name: Generate build artifact
+        uses: actions/upload-artifact@main
+        with:
+          name: build
+          path: tesi.pdf
+  deploy:
+    name: Deploy
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}/tesi.pdf
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+      - name: Download static site artifact
+        uses: actions/download-artifact@main
+        with:
+          name: build
+          path: site
+      - name: Setup Pages
+        uses: actions/configure-pages@main
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@main
+        with:
+          path: site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@main
