@@ -26,11 +26,13 @@ jobs:
         uses: actions/checkout@main
       - name: Build
         uses: reitermarkus/latexmk@main
+        with:
+          directory: tesi
       - name: Generate build artifact
         uses: actions/upload-artifact@main
         with:
           name: build
-          path: tesi.pdf
+          path: tesi/tesi.pdf
   deploy:
     name: Deploy
     environment:
