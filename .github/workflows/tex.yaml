@@ -17,22 +17,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: Build
-    container: asciidoctor/docker-asciidoctor
-    defaults:
-      run:
-        working-directory: thesis/
+    container: sotetsuk/pdflatex
     steps:
       - name: Checkout code
         uses: actions/checkout@main
       - name: Build
-        uses: reitermarkus/latexmk@main
-        with:
-          directory: tesi
+        run: cd tesi/ && pdflatex tesi.tex
       - name: Generate build artifact
         uses: actions/upload-artifact@main
         with:
           name: build
-          path: tesi/tesi.pdf
+          path: tesi.pdf
   deploy:
     name: Deploy
     environment:
