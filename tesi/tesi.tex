@@ -1,209 +1,275 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%12pt: grandezza caratter
-                                        %a4paper: formato a4
-                                        %openright: apre i capitoli a destra
-                                        %twoside: serve per fare un
-                                        %   documento fronteretro
-                                        %report: stile tesi (oppure book)
-\documentclass[12pt,a4paper,openright,twoside]{report}
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%libreria per scrivere in italiano
+\documentclass[12pt,a4paper,twoside]{book}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,inner=3.5cm,outer=2.5cm]{geometry}
+
+\usepackage[titletoc,title,toc,page]{appendix}
+\usepackage{verbatim}
+\usepackage{placeins}
+\usepackage{listings}
+\usepackage{hyperref}
 \usepackage[italian]{babel}
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%libreria per accettare i caratteri
-                                        %   digitati da tastiera come Ë ‡
-                                        %   si puÚ usare anche
-                                        %   \usepackage[T1]{fontenc}
-                                        %   perÚ con questa libreria
-                                        %   il tempo di compilazione
-                                        %   aumenta
-\usepackage[latin1]{inputenc}
-%\usepackage[utf8]{inputenc} %in alternativa si puÚ usare utf8
+\usepackage{tikz}
+\usepackage{parskip}
 
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%libreria per impostare il documento
-\usepackage{fancyhdr}
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%libreria per avere l'indentazione
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   all'inizio dei capitoli, ...
-\usepackage{indentfirst}
-%
-%%%%%%%%%libreria per mostrare le etichette
-%\usepackage{showkeys}
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%libreria per inserire grafici
 \usepackage{graphicx}
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%libreria per utilizzare font
-                                        %   particolari ad esempio
-                                        %   \textsc{}
+\usepackage{blindtext}
+\usepackage{chngcntr}
+\counterwithin{table}{chapter}
+
 \usepackage{newlfont}
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%librerie matematiche
-\usepackage{amssymb}
-\usepackage{amsmath}
-\usepackage{latexsym}
-\usepackage{amsthm}
-%
-\oddsidemargin=30pt \evensidemargin=20pt%impostano i margini
-\hyphenation{sil-la-ba-zio-ne pa-ren-te-si}%serve per la sillabazione: tra parentesi
-					   %vanno inserite come nell'esempio le parole
-%					   %che latex non riesce a tagliare nel modo giusto andando a capo
+\usepackage{fancyhdr}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[capitalize,noabbrev]{cleveref}
+\usepackage{soul}
+\usepackage[font=footnotesize,labelfont=bf]{caption}
 
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%comandi per l'impostazione
-                                        %   della pagina, vedi il manuale
-                                        %   della libreria fancyhdr
-                                        %   per ulteriori delucidazioni
-\pagestyle{fancy}\addtolength{\headwidth}{20pt}
-\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection \ #1}{}}
-\rhead[\fancyplain{}{\bfseries\leftmark}]{\fancyplain{}{\bfseries\thepage}}
-\cfoot{}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\linespread{1.3}                        %comando per impostare l'interlinea
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%definisce nuovi comandi
+\usepackage{multirow}
+\usepackage{hyphenat}
+\hyphenation{mate-mati-ca recu-perare}
 
-% % Bibliografia alternativa
-% \usepackage{natbib}
-% \bibliographystyle{alpha}
-% \setcitestyle{super,open={[},close={]}}
+\usepackage{lscape} 
 
-\usepackage[titletoc,title,toc,page]{appendix} %appendici
-\usepackage{pdfpages} %embed di pdf
-\usepackage{lscape} %modalit‡ landscape
-\usepackage{float}%posizionamento elementi
-\usepackage{hyperref}%url
+\usepackage{natbib}
+\bibliographystyle{alpha}
+\setcitestyle{super,open={[},close={]}}
 
+\newcommand{\rom}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+\usepackage{pdfpages}
 
 \begin{document}
-\input{frontespizio.tex}
-\begin{titlepage}                       %crea un ambiente libero da vincoli
-                                        %   di margini e grandezza caratteri:
-                                        %   si puÚ modificare quello che si
-                                        %   vuole, tanto fuori da questo
-                                        %   ambiente tutto viene ristabilit
-%
-\thispagestyle{empty}                   %elimina il numero della pagina
-\topmargin=6.5cm                        %imposta il margina superiore a 6.5cm
-\raggedleft                             %incolonna la scrittura a destra
-\large                                  %aumenta la grandezza del carattere
-                                        %   a 14pt
-\em                                     %emfatizza (corsivo) il carattere
-Questa Ë la \textsc{Dedica}:\\
-ognuno puÚ scrivere quello che vuole, \\
-anche nulla \ldots                      %\ldots lascia tre puntini
-\newpage                                %va in una pagina nuov
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\clearpage{\pagestyle{empty}\cleardoublepage}%non numera l'ultima pagina sinistra
-\end{titlepage}
-\pagenumbering{roman}                   %serve per mettere i numeri romani
-\chapter*{Introduzione}                 %crea l'introduzione (un capitolo
-                                        %   non numerato)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%imposta l'intestazione di pagina
-\rhead[\fancyplain{}{\bfseries
-INTRODUZIONE}]{\fancyplain{}{\bfseries\thepage}}
-\lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries
-INTRODUZIONE}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%aggiunge la voce Introduzione
-                                        %   nell'indice
-\addcontentsline{toc}{chapter}{Introduzione}
-Questa Ë l'introduzione.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%non numera l'ultima pagina sinistra
-\clearpage{\pagestyle{empty}\cleardoublepage}
-\tableofcontents                        %crea l'indice
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%imposta l'intestazione di pagina
-\rhead[\fancyplain{}{\bfseries\leftmark}]{\fancyplain{}{\bfseries\thepage}}
-\lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries
-INDICE}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%non numera l'ultima pagina sinistra
-\clearpage{\pagestyle{empty}\cleardoublepage}
-\listoffigures                          %crea l'elenco delle figure
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%non numera l'ultima pagina sinistra
-\clearpage{\pagestyle{empty}\cleardoublepage}
-\listoftables                           %crea l'elenco delle tabelle
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%non numera l'ultima pagina sinistra
-\clearpage{\pagestyle{empty}\cleardoublepage}
-\chapter{Primo Capitolo}                %crea il capitolo
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%imposta l'intestazione di pagina
-\lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries\rightmark}}
-\pagenumbering{arabic}                  %mette i numeri arabi
-Questo Ë il primo capitolo.
-\section{Prima Sezione}                 %crea la sezione
-Questa Ë la prima sezione.
-
-Ora vediamo un elenco numerato:         %crea un elenco numerato
-\begin{enumerate}
-\item primo oggetto
-\item secondo oggetto
-\item terzo oggetto
-\item quarto oggetto
-\end{enumerate}
-
-\begin{figure}[h]                       %crea l'ambiente figura; [h] sta
-                                        %   per here, cioË la figura va qui
-\begin{center}                          %centra nel mezzo della pagina
-                                        %   la figura
-%\includegraphics[width=5cm]{figura.eps}%inserisce una figura larga 5cm
-                                        %se si vuole usare va scommentat
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%inserisce la legenda ed etichetta
-                                        %   la figura con \label{fig:prima}
-\caption[legenda elenco figure]{legenda sotto la figura}\label{fig:prima}
+% Per spostare i vari elementi pi√π su o pi√π gi√π gioca con i valori di vspace che ci sono tra uno e l'altro
+\pagestyle{empty}
+\newgeometry{left=2cm, right=2cm}
+\begin{titlepage}
+\begin{center}
+    {{\Large{\textsc{Alma Mater Studiorum $\cdot$ Universit√† di Bologna}}}}
+    \rule[0.1cm]{\textwidth}{0.1mm}
+    \rule[0.5cm]{\textwidth}{0.6mm}\\
+    {\small{\bf SCUOLA DI SCIENZE\\
+    Corso di Laurea in Informatica}}
 \end{center}
-\end{figure}
 
-\section{Seconda Sezione}
-Ora vediamo un elenco puntato:
-\begin{itemize}                         %crea un elenco puntato
-\item primo oggetto
-\item secondo oggetto
+\vspace{25mm}
+
+\begin{center}
+    {\LARGE{\bf TITOLO DELLA }}\\
+    \vspace{3mm}
+    {\LARGE{\bf TESI ANCHE SU}}\\
+    \vspace{3mm}
+    {\LARGE{\bf PI√ô RIGHE}}\\
+\end{center}
+
+\vspace{60mm}
+\par
+\noindent
+\begin{minipage}[t]{0.04\textwidth}
+~
+\end{minipage}
+\begin{minipage}[t]{0.4\textwidth}
+{\large{\bf Relatore:\\
+Chiar.mo Prof.\\
+RELATORE}}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.4\textwidth}\raggedleft
+{\large{\bf Presentata da:\\
+TU}}
+\end{minipage}
+\begin{minipage}[t]{0.04\textwidth}
+~
+\end{minipage}
+
+\vspace{30mm}
+
+\begin{center}
+    {\large{\bf \rom{1} Sessione\\
+    Anno Accademico 2022/2023 }}
+\end{center}
+\end{titlepage}
+
+\restoregeometry
+\newpage
+\begin{center}
+    (DA FARE ALLA FINE)\\
+    5 parole chiave per caratterizzare il contenuto della dissertazione:\\ (se non ti piacciono cos√¨ sparse puoi anche semplicamente scriverle su una riga sola)
+\end{center}
+
+% https://tex.stackexchange.com/questions/26538/words-scattered-randomly-in-on-coverpage
+\begin{tikzpicture}[overlay,remember picture,shift=(current page.center)]
+\pgfmathsetseed{3}
+
+
+\foreach [count=\count] \word in {Parola 1, parola 2, parola 3, parola 4, parola 5} {
+\node [
+    xshift={(mod(\count,3)-1)*(\paperwidth/4)},
+    yshift={(mod(\count,7)-3)*(\paperwidth/6)},
+    xshift=rand*4cm,
+    yshift=rand*2cm,
+    % rotate=rand*35,
+    % opacity=rnd*0.5+0.125,
+    font=\large] {\word};
+}
+\end{tikzpicture}
+\newpage
+
+\topmargin=6.5cm
+\begin{flushright}
+\emph{
+\LARGE{La dedica}\\\vspace{2mm}
+\LARGE{anche quella se vuoi}\\\vspace{3mm} 
+\LARGE{su pi√π righe} 
+}
+\end{flushright}
+\newpage~\newpage
+\pagenumbering{gobble}
+\chapter*{Abstract}
+Abstract qui (ti consiglio di farlo alla fine)
+
+\topmargin=-1cm
+\tableofcontents
+\thispagestyle{empty}
+\listoftables
+\thispagestyle{empty}
+\listoffigures
+\thispagestyle{empty}
+\newpage~\newpage
+
+
+\pagenumbering{arabic}
+\setcounter{chapter}{-1}
+\raggedbottom
+\chapter{INTRODUZIONE} \label{chap:intro}
+\pagestyle{plain}
+\setcounter{page}{1}
+
+(Io l'introduzione l'ho scritta alla fine)\\
+bla bla bla
+\section{elenchi}
+\subsection{Elenchi puntati}
+\begin{itemize}
+    \item bla
+    \begin{itemize}
+        \item sub-bla
+    \end{itemize}
+    \item bla
 \end{itemize}
 
-\section{Altra Sezione}
-Vediamo un elenco descrittivo:
-\begin{description}                     %crea un elenco descrittivo
-  \item[OGGETTO1] prima descrizione;
-  \item[OGGETTO2] seconda descrizione;
-  \item[OGGETTO3] terza descrizione.
-\end{description}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%crea una sottosezione
-\subsection{Altra SottoSezione}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%crea una sottosottosezione
-\subsubsection{SottoSottoSezione}Questa sottosottosezione non viene
-numerata, ma Ë solo scritta in grassetto.
-\section{Altra Sezione}                 %crea una sottosezione
-Vediamo la creazione di una tabella; la tabella \ref{tab:uno}
-(richiamo il nome della tabella utilizzando la label che ho messo sotto):
-la facciamo di tre righe e tre colonne, la prima colonna
-``incolonnata'' a destra (r) e le altre centrate (c):\\
-\begin{table}[h]                        %ambiente tabella
-                                        %(serve per avere la legenda)
-\begin{center}                          %centra nella pagina la tabella
-\begin{tabular}{r|c|c}                  %tre colonne con righe verticali
-                                        %   prodotte con |
-\hline \hline                           %inserisce due righe orizzontali
-$(1,1)$ & $(1,2)$ & $(1,3)$\\           %& separa le colonne e con
-\hline                                  %inserisce una riga orizzontale
-$(2,1)$ & $(2,2)$ & $(2,3)$\\           %  \\ va a capo
-\hline                                  %inserisce una riga orizzontale
-$(3,1)$ & $(3,2)$ & $(3,3)$\\
-\hline \hline                           %inserisce due righe orizzontali
-\end{tabular}
-\caption[legenda elenco tabelle]{legenda tabella}\label{tab:uno}
-\end{center}
-\end{table}
-\section{Altra Sezione}\label{sec:prova}%posso mettere le label anche
-                                        %   alle section
-\subsection{Listati dei programmi}
-\subsubsection{Primo Listato}
-\begin{verbatim}
-        In questo ambiente     posso scrivere      come voglio,
-lasciare gli spazi che voglio e non % commentare quando voglio
-e ci sar‡ scritto tutto.
-Quando lo uso Ë meglio che disattivi il Wrap del WinEdt
-\end{verbatim}
+\subsection{Elenchi numerati}
+\begin{enumerate}
+    \item bla1
+    \begin{enumerate}
+        \item sub bla 1
+        \item sub bla 2
+    \end{enumerate}
+    \item bla 2
+\end{enumerate}
 
+\subsection{Mix}
+\begin{itemize}
+    \item bla
+    \begin{enumerate}
+        \item sub bla 1
+    \end{enumerate}
+    \item bla
+\end{itemize}
+
+\begin{enumerate}
+    \item bla 1
+    \begin{itemize}
+        \item sub bla
+    \end{itemize}
+    \item bla 2
+\end{enumerate}
+
+\section{Font}
+\textbf{bla bla bla}\\
+\textit{Ancora bla bla bla}\\
+\texttt{bla bla ma in un'altra riga}
+
+\subsection{Sottosezione 1 - parskip}
+Grazie al package parskip se vai a capo nel .tex lasciando una riga
+
+ti mette un po' di spazio anche nel pdf.\\
+Attenzione per√≤ che ogni tanto questa feature fa lasciare troppo spazio tra testo e immagini / tabelle, se capita prova a togliere un po' di righe vuote. \\
+Senza questo pacchetto, una doppia new line (\texttt{$\backslash n\backslash n$}) crea un nuovo paragrafo, la cui prima riga viene leggermente indentata (un comportamento indesiderato se vieni da altri strumenti di stesura). Eventualmente, si pu√≤ usare per allungare di qualche pagina alla tesi, evitando di abusarne.
+\subsection{Sottosezione 2 - capitoli}
+I capitoli iniziano sempre in una pagina dispari, quindi a volte vedrai delle pagine bianche tra uno e l'altro
+\subsubsection{Sottosottosezione 1} \label{subsub:bla}
+bla bla bla
+
+\chapter{Dopo l'introduzione}
+qua scrivi qualcosa
+\section{Immagini}
+Quando fai begin figure, ricordati di mettere tra quadre un modificatore di posizione: H significa esattamente nel punto dove si trova l'immagine nel file .tex e ti consiglio di usare quello, se no ci sono ad esempio t (top) e b (bottom).
+
+\begin{figure}[H]
+    \centering
+    % Se metti solo una delle due dimensioni, l'altra scala in automatico
+    \includegraphics[height = 6cm, width=8cm]{img/frog.jpg}
+    \caption{Caption (questo viene scritto nell'indice delle figure)}
+    % La label ci vuole sempre e te la inventi tu: serve per riferirsi alle immagini successivamente
+    \label{fig:frog}
+\end{figure}
+
+\section{tabelle}
+\subsection{Tabella semplice}
+Anche qui nota H tra quadre, la caption e la label
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|}
+    \hline
+        \textbf{Pratiche agili} & \textbf{Studenti}  \\ \hline
+        Sprint planning & 73  \\ \hline
+        Pair programming & 73  \\ \hline
+        Retrospettiva & 48  \\ \hline
+    \end{tabular}
+    \caption{Tabella semplice (anche questo scritto nell'indice delle tabelle)}
+    \label{tab:simple}
+\end{table}
+
+\subsection{tabelle avanzate}
+Con multirow (e multicolumn che per√≤ serve meno) puoi fare righe (colonne) pi√π grandi del normale.\\
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+        \textbf{Team} & \textbf{LoC verificate} & \textbf{LoC sviluppatori} & \textbf{Ore sviluppatori} & \textbf{LoC/h}  \\ \hline
+        \multirow{2}*{1} & 1148& m: 888& m: 40& 22\cr & Diff: -1852& $\sigma$: 371& $\sigma$: 27& \\ \hline
+        \multirow{2}*{2}&1858& m: 1404& m: 65& 22\cr &  Diff: -448& $\sigma$: 1222& $\sigma$: 78& \\ \hline
+        \multirow{2}*{3}&1640& m: 1400& m: 96& 15\cr &  Diff: -2810& $\sigma$: 1417& $\sigma$: 41& \\ \hline
+    \end{tabular}
+    \caption{CAPTION}
+    \label{tab:avanz}
+\end{table}
+
+\subsubsection{Tabelle girate}
+Se usi landscape la tabella viene girata (nel caso dovessi inserirne una molto grande)
+\begin{landscape}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|}
+    \hline
+        \textbf{Numero} & \textbf{\#}  \\ \hline
+        UNO & 1  \\ \hline
+        DUE & 2  \\ \hline
+        TRE & 3  \\ \hline
+    \end{tabular}
+    \caption{Tabella girata}
+    \label{tab:girata}
+\end{table}
+
+\end{landscape}
+
+
+\chapter{Altri comandi}
+bla bla
 \section{Math mode}
 Per inserire simboli matematici (e lettere greche) serve la math mode:
 
@@ -220,105 +286,58 @@ Anche le equazioni possono avere label.
 \section{url e footnote}
 per mettere un link usa url: \url{wikipedia.it}
 
-per fare note a piË di pagina usa footnote\footnote{Tipo questa}
+per fare note a pi√® di pagina usa footnote\footnote{Tipo questa}
+\section{verbatim}
+Se ti serve scrivere codice o qualcosa per cui ti serve una formattazione specifica usa verbatim:
+\begin{verbatim}
+    Qui puoi scrivere
 
+    come      vuoi
+    e viene tutto
 
-\section{Modalit‡ landscape}
-Se usi landscape la pagina viene girata (nel caso dovessi inserirne una molto grande)
-\begin{landscape}
-\begin{table}[H]
-    \centering
-    \begin{tabular}{|c|c|}
-    \hline
-        \textbf{Numero} & \textbf{\#}  \\ \hline
-        UNO & 1  \\ \hline
-        DUE & 2  \\ \hline
-        TRE & 3  \\ \hline
-    \end{tabular}
-    \caption{Tabella girata}
-    \label{tab:girata}
-\end{table}
+scritto
+                    monospaziato
+\end{verbatim}
+\section{riferimenti}
+Come detto prima le label servono per riferirsi ad altre parti del testo citate precendentemente.\\
+Ti consiglio di metterle sempre almeno a figure. immagini e capitoli.
 
-\end{landscape}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%non numera l'ultima pagina sinistra
-\clearpage{\pagestyle{empty}\cleardoublepage}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%per fare le conclusioni
-\chapter*{Conclusioni}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%imposta l'intestazione di pagina
-\rhead[\fancyplain{}{\bfseries
-CONCLUSIONI}]{\fancyplain{}{\bfseries\thepage}}
-\lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries
-CONCLUSIONI}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%aggiunge la voce Conclusioni
-                                        %   nell'indice
-\addcontentsline{toc}{chapter}{Conclusioni} Queste sono le
-conclusioni.\\
-In queste conclusioni voglio fare un riferimento alla
-bibliografia: questo Ë il mio riferimento \cite{K3,K4}.
+Per riferirti a qualcosa basta fare ref seguito dal nome della label, ad esempio ``vedi capitolo \ref{chap:intro}''.\\In questo modo dal pdf cliccando sulla reference, ti porta direttamente al punto giusto.
+Altri pacchetti come \texttt{fancyref} e \texttt{cleveref} (consigliato) possono aiutare nell'automatizzare la creazione delle refrence. Usando ad esempio \texttt{\cref{chap:intro}} viene generata la dicitura corrispondete all'elemento a cui si fa riferimento, seguita dalla numerazione. Eccone un esempio: \cref{chap:intro}.
+\section{citazioni}
+Per citare si usa cite seguito dal nome dell'articolo nel file.bib, ad esempio ``come visto nell'articolo di tizio\cite{greenwade93}''.
 
-
-%Appendici alternative ed embed di pdf
-% \renewcommand{\appendixtocname}{Appendici}
-% \renewcommand{\appendixpagename}{Appendici}
-% % \csname @openrightfalse\endcsname
-% \pagenumbering{gobble}
-% \begin{appendices}
-% \chapter{Appendice 1}
-% \label{Appendice:A}
-% Appendice A
-
-% \chapter{Embed di interi PDF}
-% \label{Appendice:B}
-% Se ti serve puoi fare embed di PDF interi con pdfpage, scegliendo anche le pagine (o mettendo - se le vuoi tutte):
-
-% \includepdf[pages=1]{pdf/sample.pdf}
-% \end{appendices}
+Se non ti piace lo stile di citazione puoi modificarlo sopra dove scrivo usepackage natbib, ma quello impostato attualmente dovrebbe andare bene.
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%imposta l'intestazione di pagina
-\renewcommand{\chaptermark}[1]{\markright{\thechapter \ #1}{}}
-\lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries\rightmark}}
-\appendix                               %imposta le appendici
-\chapter{Prima Appendice}               %crea l'appendice
-In questa Appendice non si Ë utilizzato il comando:\\
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\verb"" Ë equivalente all'
-                                        %   ambiente verbatim,
-                                        %   ma si utilizza all'interno
-                                        %   di un discorso.
-\verb"\clearpage{\pagestyle{empty}\cleardoublepage}", ed infatti
-l'ultima pagina 8 ha l'intestazione con il numero di pagina in
-alto.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%imposta l'intestazione di pagina
-\rhead[\fancyplain{}{\bfseries \thechapter \:Prima Appendice}]
-{\fancyplain{}{\bfseries\thepage}}
-\chapter{Seconda Appendice}             %crea l'appendice
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%imposta l'intestazione di pagina
-\rhead[\fancyplain{}{\bfseries \thechapter \:Seconda Appendice}]
-{\fancyplain{}{\bfseries\thepage}}
-\begin{thebibliography}{90}             %crea l'ambiente bibliografia
-\rhead[\fancyplain{}{\bfseries \leftmark}]{\fancyplain{}{\bfseries
-\thepage}}
+\renewcommand{\bibsection}{}
+\chapter*{Riferimenti bibliografici}
+\bibliography{refs}
+\newpage
 
-% Bibliografia alternativa (usare chapter o section a seconda del tipo di documento)
-% \renewcommand{\bibsection}{}
-% \chapter*{Riferimenti bibliografici}
-% \bibliography{refs} %file .bib
+\renewcommand{\appendixtocname}{Appendici}
+\renewcommand{\appendixpagename}{Appendici}
+% \csname @openrightfalse\endcsname
+\pagenumbering{gobble}
+\begin{appendices}
+\chapter{Appendice 1}
+\label{Appendice:A}
+Probabilmente ci sono un sacco di package non utilizzati ma cos√¨ funziona tutto quindi non ho indagato oltre.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%aggiunge la voce Bibliografia
-                                        %   nell'indice                                     
-\addcontentsline{toc}{chapter}{Bibliografia}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%provare anche questo comando:
-%%%%%%%%%%%\addcontentsline{toc}{chapter}{\numberline{}{Bibliografia}}
-\bibitem{K1} Primo oggetto bibliografia.
-\bibitem{K2} Secondo oggetto bibliografia.
-\bibitem{K3} Terzo oggetto bibliografia.
-\bibitem{K4} Quarto oggetto bibliografia.
-\end{thebibliography}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%non numera l'ultima pagina sinistra
-\clearpage{\pagestyle{empty}\cleardoublepage}
+Inoltre su internet c'√® un sacco di documentazione se ti servisse.
+\chapter{Appendice B}
+\label{Appendice:B}
+Appendice B se serve
+
+\chapter{Embed di interi PDF}
+\label{Appendice:C}
+Se ti serve puoi fare embed di PDF interi con pdfpage, scegliendo anche le pagine (o mettendo - se le vuoi tutte):
+
+\includepdf[pages=1]{pdf/sample.pdf}
+\end{appendices}
+
+\newpage~\newpage
 \chapter*{Ringraziamenti}
-\thispagestyle{empty}
-Qui possiamo ringraziare il mondo intero!!!!!!!!!!\\
-Ovviamente solo se uno vuole, non Ë obbligatorio.
+Grazie a tutti
 \end{document}
