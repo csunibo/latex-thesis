@@ -17,6 +17,8 @@
                                         %   il tempo di compilazione
                                         %   aumenta
 \usepackage[latin1]{inputenc}
+%\usepackage[utf8]{inputenc} %in alternativa si può usare utf8
+
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%libreria per impostare il documento
 \usepackage{fancyhdr}
@@ -46,7 +48,8 @@
 \hyphenation{sil-la-ba-zio-ne pa-ren-te-si}%serve per la sillabazione: tra parentesi
 					   %vanno inserite come nell'esempio le parole
 %					   %che latex non riesce a tagliare nel modo giusto andando a capo
-%
+
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%comandi per l'impostazione
                                         %   della pagina, vedi il manuale
                                         %   della libreria fancyhdr
@@ -60,11 +63,23 @@
 \linespread{1.3}                        %comando per impostare l'interlinea
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%definisce nuovi comandi
 
+% % Bibliografia alternativa
+% \usepackage{natbib}
+% \bibliographystyle{alpha}
+% \setcitestyle{super,open={[},close={]}}
+
+\usepackage[titletoc,title,toc,page]{appendix} %appendici
+\usepackage{pdfpages} %embed di pdf
+\usepackage{lscape} %modalità landscape
+\usepackage{float}%posizionamento elementi
+\usepackage{hyperref}%url
+
+
 \begin{document}
 \input{frontespizio.tex}
 \begin{titlepage}                       %crea un ambiente libero da vincoli
                                         %   di margini e grandezza caratteri:
-                                        %   si pu\`o modificare quello che si
+                                        %   si può modificare quello che si
                                         %   vuole, tanto fuori da questo
                                         %   ambiente tutto viene ristabilit
 %
@@ -74,8 +89,8 @@
 \large                                  %aumenta la grandezza del carattere
                                         %   a 14pt
 \em                                     %emfatizza (corsivo) il carattere
-Questa \`e la \textsc{Dedica}:\\
-ognuno pu\`o scrivere quello che vuole, \\
+Questa è la \textsc{Dedica}:\\
+ognuno può scrivere quello che vuole, \\
 anche nulla \ldots                      %\ldots lascia tre puntini
 \newpage                                %va in una pagina nuov
 %
@@ -93,7 +108,7 @@ INTRODUZIONE}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%aggiunge la voce Introduzione
                                         %   nell'indice
 \addcontentsline{toc}{chapter}{Introduzione}
-Questa \`e l'introduzione.
+Questa è l'introduzione.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%non numera l'ultima pagina sinistra
 \clearpage{\pagestyle{empty}\cleardoublepage}
 \tableofcontents                        %crea l'indice
@@ -113,9 +128,9 @@ INDICE}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%imposta l'intestazione di pagina
 \lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries\rightmark}}
 \pagenumbering{arabic}                  %mette i numeri arabi
-Questo \`e il primo capitolo.
+Questo è il primo capitolo.
 \section{Prima Sezione}                 %crea la sezione
-Questa \`e la prima sezione.
+Questa è la prima sezione.
 
 Ora vediamo un elenco numerato:         %crea un elenco numerato
 \begin{enumerate}
@@ -156,7 +171,7 @@ Vediamo un elenco descrittivo:
 \subsection{Altra SottoSezione}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%crea una sottosottosezione
 \subsubsection{SottoSottoSezione}Questa sottosottosezione non viene
-numerata, ma \`e solo scritta in grassetto.
+numerata, ma è solo scritta in grassetto.
 \section{Altra Sezione}                 %crea una sottosezione
 Vediamo la creazione di una tabella; la tabella \ref{tab:uno}
 (richiamo il nome della tabella utilizzando la label che ho messo sotto):
@@ -188,6 +203,43 @@ lasciare gli spazi che voglio e non % commentare quando voglio
 e ci sarà scritto tutto.
 Quando lo uso è meglio che disattivi il Wrap del WinEdt
 \end{verbatim}
+
+\section{Math mode}
+Per inserire simboli matematici (e lettere greche) serve la math mode:
+
+Usando il simbolo del dollaro hai la math mode inline: $5 \times \alpha = 3\lambda$
+
+Altrimenti hai quella con le barre e le quadre \[ \frac{\sum_6^i 3i\theta}{12k^2\times 7}\]
+
+Infine hai quelle con begin equation (che vengono numerate):
+\begin{equation}
+    \frac{1}{2}\times A_{bcd}\times E^{fgh}
+\end{equation}
+
+Anche le equazioni possono avere label.
+\section{url e footnote}
+per mettere un link usa url: \url{wikipedia.it}
+
+per fare note a piè di pagina usa footnote\footnote{Tipo questa}
+
+
+\section{Modalità landscape}
+Se usi landscape la pagina viene girata (nel caso dovessi inserirne una molto grande)
+\begin{landscape}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|}
+    \hline
+        \textbf{Numero} & \textbf{\#}  \\ \hline
+        UNO & 1  \\ \hline
+        DUE & 2  \\ \hline
+        TRE & 3  \\ \hline
+    \end{tabular}
+    \caption{Tabella girata}
+    \label{tab:girata}
+\end{table}
+
+\end{landscape}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%non numera l'ultima pagina sinistra
 \clearpage{\pagestyle{empty}\cleardoublepage}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%per fare le conclusioni
@@ -202,13 +254,34 @@ CONCLUSIONI}}
 \addcontentsline{toc}{chapter}{Conclusioni} Queste sono le
 conclusioni.\\
 In queste conclusioni voglio fare un riferimento alla
-bibliografia: questo \`e il mio riferimento \cite{K3,K4}.
+bibliografia: questo è il mio riferimento \cite{K3,K4}.
+
+
+%Appendici alternative ed embed di pdf
+% \renewcommand{\appendixtocname}{Appendici}
+% \renewcommand{\appendixpagename}{Appendici}
+% % \csname @openrightfalse\endcsname
+% \pagenumbering{gobble}
+% \begin{appendices}
+% \chapter{Appendice 1}
+% \label{Appendice:A}
+% Appendice A
+
+% \chapter{Embed di interi PDF}
+% \label{Appendice:B}
+% Se ti serve puoi fare embed di PDF interi con pdfpage, scegliendo anche le pagine (o mettendo - se le vuoi tutte):
+
+% \includepdf[pages=1]{pdf/sample.pdf}
+% \end{appendices}
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%imposta l'intestazione di pagina
 \renewcommand{\chaptermark}[1]{\markright{\thechapter \ #1}{}}
 \lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries\rightmark}}
 \appendix                               %imposta le appendici
 \chapter{Prima Appendice}               %crea l'appendice
-In questa Appendice non si \`e utilizzato il comando:\\
+In questa Appendice non si è utilizzato il comando:\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\verb"" è equivalente all'
                                         %   ambiente verbatim,
                                         %   ma si utilizza all'interno
@@ -226,8 +299,14 @@ alto.
 \begin{thebibliography}{90}             %crea l'ambiente bibliografia
 \rhead[\fancyplain{}{\bfseries \leftmark}]{\fancyplain{}{\bfseries
 \thepage}}
+
+% Bibliografia alternativa (usare chapter o section a seconda del tipo di documento)
+% \renewcommand{\bibsection}{}
+% \chapter*{Riferimenti bibliografici}
+% \bibliography{refs} %file .bib
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%aggiunge la voce Bibliografia
-                                        %   nell'indice
+                                        %   nell'indice                                     
 \addcontentsline{toc}{chapter}{Bibliografia}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%provare anche questo comando:
 %%%%%%%%%%%\addcontentsline{toc}{chapter}{\numberline{}{Bibliografia}}
@@ -241,5 +320,5 @@ alto.
 \chapter*{Ringraziamenti}
 \thispagestyle{empty}
 Qui possiamo ringraziare il mondo intero!!!!!!!!!!\\
-Ovviamente solo se uno vuole, non \`e obbligatorio.
+Ovviamente solo se uno vuole, non è obbligatorio.
 \end{document}
