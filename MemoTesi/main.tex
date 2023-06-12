@@ -192,12 +192,13 @@ bla bla bla
 \textit{Ancora bla bla bla}\\
 \texttt{bla bla ma in un'altra riga}
 
-\subsection{Sottosezione 1}
+\subsection{Sottosezione 1 - parskip}
 Grazie al package parskip se vai a capo nel .tex lasciando una riga
 
 ti mette un po' di spazio anche nel pdf.\\
-Attenzione però che ogni tanto questa feature fa lasciare troppo spazio tra testo e immagini / tabelle, se capita prova a togliere un po' di righe vuote. Senza questo pacchetto, una doppia new line (\texttt{\n\n}) creea un nuovo paragrafo, la cui prima riga viene leggermente indentata (un comportamento indesiderato se vieni da altri strumenti di stesura). Eventualmente, si può usare per allungare di qualche pagina alla tesi, evitando di abusarne.
-\subsection{Sottosezione 2}
+Attenzione però che ogni tanto questa feature fa lasciare troppo spazio tra testo e immagini / tabelle, se capita prova a togliere un po' di righe vuote. \\
+Senza questo pacchetto, una doppia new line (\texttt{$\backslash n\backslash n$}) crea un nuovo paragrafo, la cui prima riga viene leggermente indentata (un comportamento indesiderato se vieni da altri strumenti di stesura). Eventualmente, si può usare per allungare di qualche pagina alla tesi, evitando di abusarne.
+\subsection{Sottosezione 2 - capitoli}
 I capitoli iniziano sempre in una pagina dispari, quindi a volte vedrai delle pagine bianche tra uno e l'altro
 \subsubsection{Sottosottosezione 1} \label{subsub:bla}
 bla bla bla
@@ -255,10 +256,10 @@ Se usi landscape la tabella viene girata (nel caso dovessi inserirne una molto g
     \centering
     \begin{tabular}{|c|c|}
     \hline
-        \textbf{Pratiche agili} & \textbf{Studenti}  \\ \hline
-        Sprint planning & 73  \\ \hline
-        Pair programming & 73  \\ \hline
-        Retrospettiva & 48  \\ \hline
+        \textbf{Numero} & \textbf{\#}  \\ \hline
+        UNO & 1  \\ \hline
+        DUE & 2  \\ \hline
+        TRE & 3  \\ \hline
     \end{tabular}
     \caption{Tabella girata}
     \label{tab:girata}
@@ -333,7 +334,7 @@ Appendice B se serve
 \label{Appendice:C}
 Se ti serve puoi fare embed di PDF interi con pdfpage, scegliendo anche le pagine (o mettendo - se le vuoi tutte):
 
-\includepdf[pages=1]{pdf/Requisiti.pdf}
+\includepdf[pages=1]{pdf/sample.pdf}
 \end{appendices}
 
 \newpage~\newpage
