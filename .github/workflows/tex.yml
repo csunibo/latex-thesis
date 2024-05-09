@@ -17,12 +17,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: Build
-    container: sotetsuk/pdflatex
     steps:
       - name: Checkout code
         uses: actions/checkout@main
-      - name: Build
-        run: cd tesi/ && pdflatex tesi.tex
+      - name: Compile thesis
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: tesi/tesi.tex
+          work_in_root_file_dir: true
       - name: Generate build artifact
         uses: actions/upload-artifact@main
         with:
