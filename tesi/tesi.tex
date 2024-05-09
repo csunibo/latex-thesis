@@ -267,6 +267,32 @@ Se usi landscape la tabella viene girata (nel caso dovessi inserirne una molto g
 
 \end{landscape}
 
+\section{Grafici}
+Puoi creare grafici con tikzpicture.
+Qui c'e' un grafico con asse x e y customizzabili per ogni tipo d'utilizzo.
+Tutti i tool e tutorial necessari per creare ogni tipo di grafico puo' essere trovato qui: https://tikz.dev/
+
+\begin{tikzpicture}
+  % Draw x-axis
+  \draw[->] (-1,0) -- (15,0) node[right] {$x$};
+  % Draw y-axis
+  \draw[->] (0,-1) -- (0,5) node[above] {$y$};
+  
+  % Draw grid lines (optional)
+  \foreach \x in {1,2,3,4,5,6,7,8,9,10,11,12,13,14}
+    \draw (\x,-0.1) -- (\x,0.1);
+  \foreach \y in {1,2,3,4}
+    \draw (-0.1,\y) -- (0.1,\y);
+  
+  % Draw origin
+  \fill (0,0) circle[radius=2pt];
+\end{tikzpicture}
+
+\section{Import di file TeX}
+Puoi importare altri file tex per intero includendoli cosi'.
+Questo e' molto utile per mettere insieme diversi capitoli di una tesi o di un grande documento in generale.
+
+\input{imported_document.tex}
 
 \chapter{Altri comandi}
 bla bla
@@ -287,6 +313,19 @@ Anche le equazioni possono avere label.
 per mettere un link usa url: \url{wikipedia.it}
 
 per fare note a piè di pagina usa footnote\footnote{Tipo questa}
+
+\section{Code snippets}
+per inserire code snippets, puoi usare lstlisting
+
+\begin{lstlisting}[language=c]
+#include<stdio.h>
+
+int main(void) {
+    printf("Hello World\n");
+    return 0;
+}
+\end{lstlisting}
+
 \section{verbatim}
 Se ti serve scrivere codice o qualcosa per cui ti serve una formattazione specifica usa verbatim:
 \begin{verbatim}
